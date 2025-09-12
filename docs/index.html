@@ -1,25 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>App Overview</title>
+<title>AidMate - Overview</title>
 <style>
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Tahoma", Arial, sans-serif;
     display: flex;
+    flex-direction: row-reverse; /* Sidebar على اليمين */
     height: 100vh;
+    background-color: #ecf0f1;
+    color: #2c3e50;
   }
 
   /* Sidebar menu */
   .sidebar {
-    width: 200px;
+    width: 240px;
     background-color: #2c3e50;
     color: white;
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
+    justify-content: space-between; /* يخلي القائمة فوق والاسم تحت */
+    padding: 20px 0;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 20px;
+    border-bottom: 1px solid #34495e;
+    padding-bottom: 10px;
   }
 
   .sidebar button {
@@ -27,14 +45,32 @@
     border: none;
     color: white;
     padding: 15px 20px;
-    text-align: left;
+    text-align: right;
     cursor: pointer;
     font-size: 16px;
     width: 100%;
+    transition: background 0.3s;
   }
 
   .sidebar button:hover, .sidebar button.active {
     background-color: #34495e;
+  }
+
+  /* Footer inside sidebar */
+  .sidebar .footer {
+    text-align: center;
+    font-size: 14px;
+    padding: 15px;
+    border-top: 1px solid #34495e;
+  }
+
+  .sidebar .footer a {
+    color: #1abc9c;
+    text-decoration: none;
+  }
+
+  .sidebar .footer a:hover {
+    text-decoration: underline;
   }
 
   /* Content area */
@@ -42,55 +78,180 @@
     flex: 1;
     padding: 30px;
     overflow-y: auto;
+    direction: rtl;
+    text-align: right;
   }
 
   .section {
     display: none;
+    animation: fadeIn 0.5s;
   }
 
   .section.active {
     display: block;
   }
 
-  h1 {
+  h1, h2, h3 {
     margin-top: 0;
+    color: #34495e;
+  }
+
+  a {
+    color: #2980b9;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  ul {
+    list-style-type: "• ";
+    padding-right: 20px;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
   }
 </style>
 </head>
 <body>
 
 <div class="sidebar">
-  <button class="active" onclick="showSection('main')">Main</button>
-  <button onclick="showSection('guide')">Guide</button>
-  <button onclick="showSection('installation')">Installation</button>
+  <div class="menu">
+    <h2>القائمة</h2>
+    <button class="active" onclick="showSection(event,'main')">الرئيسية</button>
+    <button onclick="showSection(event,'guide')">الدليل</button>
+    <button onclick="showSection(event,'installation')">التثبيت</button>
+  </div>
+  <div class="footer">
+    <p><b>Dev. Taha</b></p>
+    <p><a href="https://www.linkedin.com/in/taha-elshrif">LinkedIn</a></p>
+  </div>
 </div>
 
 <div class="content">
+
+  <!-- Main Section -->
   <div id="main" class="section active">
-    <h1>Main</h1>
-    <p>Welcome to our app! This section gives an overview of the features and main functionalities.</p>
+    <h1>الرئيسية</h1>
+    <p>
+      <b>AidMate</b> هو تطبيق هدفه <i>المساعدة في توفير الإسعافات الأولية</i> 
+      عبر شات بوت لدعم المستخدمين عند عدم توفر طبيب.
+    </p>
+    <p>
+      ⚠️ <b>تنبيه:</b> هذا مجرد <b>مساعد أولي</b> ويجب مراجعة الطبيب في حالة 
+      <b>شدة الأعراض</b> أو وجود خطأ في المعلومات.
+    </p>
+    <p>
+      التطبيق <b>مفتوح المصدر</b>، وهو <i>تحديث</i> لتطبيقي السابق 
+      <a href="https://github.com/TahaFawzyElshrif/HomeAmbalance">(link)</a>.
+    </p>
+    <p>
+      ℹ️ ملاحظة: النسخة الأساسية قد لا تعطي استجابة عندما يكون السيرفر في وضع السكون.
+    </p>
   </div>
 
-  <div id="guide" class="section">
-    <h1>Guide</h1>
-    <p>Here you will find a detailed guide on how to use the app effectively, with tips and examples.</p>
-  </div>
-
+  <!-- Installation Section -->
   <div id="installation" class="section">
-    <h1>Installation</h1>
-    <p>Instructions for installing the app on your device, including system requirements and setup steps.</p>
+    <h1>التثبيت</h1>
+    <p>
+      <b>للـ Windows:</b> يمكن تنزيل التطبيق من خلال الرابط.
+    </p>
+    <p>
+      <b>للـ Android:</b> <a href="../Installation/AidMate Android V1.apk">انقر هنا</a>.
+    </p>
   </div>
+
+  <!-- Guide Section -->
+  <div id="guide" class="section">
+    <h1>الدليل</h1>
+    <p>
+      هذا الدليل مخصص لشرح النظام. الكود <b>مفتوح المصدر</b>.
+    </p>
+
+    <h2>بنية التطبيق</h2>
+    <p>
+      التطبيق يعمل وفق <i>microservices</i>، ويتكون من 3 تطبيقات:
+    </p>
+    <ul>
+      <li><b>Android:</b> موجود في ملف <i>aidmate</i>.</li>
+      <li><b>Backend (تسجيل الدخول):</b> 
+        <a href="https://huggingface.co/spaces/taha454/AidMateAccount">AidMateAccount</a>
+      </li>
+      <li><b>Backend (النموذج اللغوي):</b> 
+        <a href="https://huggingface.co/spaces/taha454/AidMateLLM">AidMateLLM</a>
+      </li>
+    </ul>
+
+    <h2>اختيار النموذج اللغوي</h2>
+    <p>
+      الهدف استخدام <b>نموذج لغوي عربي كبير</b>. 
+      يمكن الاطلاع على جميع النماذج التي تم تجربتها في ملف بايثون.
+    </p>
+    <ul>
+      <li><b>LLama:</b> نتائج جيدة لكن غير مناسبة لسيرفر ضعيف.</li>
+      <li><b>GPT2 (aubmindlab/aragpt2-base + LoRA):</b> النواتج غير مناسبة.</li>
+      <li><b>GPT OSS20b, 120b, Gemini Flask:</b> أفضل النواتج وهي التي تم اعتمادها.</li>
+    </ul>
+
+    <h2>RAG Data</h2>
+    <p>تم جمع البيانات من:</p>
+    <ul>
+      <li>Mayo Clinic</li>
+      <li>كتاب <b>الإسعافات الأولية</b> - Nigel Barraclough</li>
+      <li>ترجمة: أبو إبراهيم وأبو عبدالله</li>
+      <li>MSD Manual</li>
+    </ul>
+
+    <h2>جزء الأوفلاين</h2>
+    <p>
+      تم بناء <i>modules in Flutter</i> لتوفير 
+      <b>chatbot بسيط</b> يعمل باستخدام <i>distance-based retrieval</i>.
+    </p>
+    <h3>Future Work</h3>
+    <ul>
+      <li>تحسين النواتج (لتجنب تكرار الإجابات).</li>
+      <li>إضافة <b>باقات معالجة اللغة العربية</b>.</li>
+      <li>مراعاة حجم التطبيق.</li>
+    </ul>
+
+    <h2>عن التطبيق</h2>
+    <ul>
+      <li>استخدام <b>Flutter</b>.</li>
+      <li>عرض النصوص عبر <i>flutter_markdown</i>.</li>
+      <li><b>Code Modularity:</b></li>
+      <ul>
+        <li><b>Background:</b> gradients</li>
+        <li><b>UI:</b> screens</li>
+        <li><b>Logic:</b> state files (Provider), OfflineBot</li>
+      </ul>
+    </ul>
+    <p>
+      <b>OfflineBot:</b> يقوم بمعالجة النصوص بالعربية ثم يحولها 
+      إلى <i>tf-idf</i> ويقارنها بأسئلة محفوظة باستخدام <i>cosine metric</i> 
+      لاستخراج أفضل إجابة. الأرقام محسوبة مسبقًا عبر بايثون ومخزنة في <i>assets</i>.
+    </p>
+
+    <h2>3rd Party</h2>
+    <ul>
+      <li>flutter_markdown</li>
+      <li>huggingface</li>
+      <li>llama</li>
+      <li>GPT</li>
+      <li>Gemini</li>
+      <li>aubmindlab/aragpt2-base</li>
+    </ul>
+  </div>
+
 </div>
 
 <script>
-  function showSection(id) {
-    // Hide all sections
+  function showSection(event, id) {
     document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    // Remove active class from all buttons
     document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
-    // Show selected section
     document.getElementById(id).classList.add('active');
-    // Highlight selected button
     event.currentTarget.classList.add('active');
   }
 </script>
